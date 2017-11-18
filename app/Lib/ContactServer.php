@@ -109,7 +109,7 @@ final class ContactServer
                 echo 'Error: ' . socket_strerror(socket_last_error($this->socket));
             }
 
-            
+
 
         } while (true);
     }
