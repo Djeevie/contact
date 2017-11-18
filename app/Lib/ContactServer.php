@@ -2,7 +2,7 @@
 
 namespace App\Lib;
 
-final class Contact
+final class ContactServer
 {
     /*
      *  @var $instance
@@ -26,7 +26,7 @@ final class Contact
     /*
      *  This array contains all connected clients.
      */
-    private static $clients = [];
+    private $clients = [];
 
     private function __construct(string $host, int $port)
     {
@@ -45,7 +45,7 @@ final class Contact
         else
         {
             echo socket_last_error($this->socket);
-            dd();
+            dd('Application has exited.');
         }
     }
 
@@ -56,14 +56,14 @@ final class Contact
      */
     public static function Instance(string $host = null, int $port = 8000)
     {
-        if (!static::$instance instanceof Contact)
+        if (!static::$instance instanceof ContactServer)
         {
             if (is_null($host))
             {
                 $host = $_SERVER['SERVER_NAME'];
             }
 
-            static::$instance = new Contact($host, $port);
+            static::$instance = new ContactServer($host, $port);
         }
     }
 
@@ -89,11 +89,28 @@ final class Contact
             return false;
         }
 
+        // Open the socket for incoming requests.
+        if (!socket_listen($this->socket, 50000))
+        {
+            return false;
+        }
+
         return true;
     }
 
     private function run()
     {
+        do
+        {
+            $newClient = null;
 
+            if ($newClient = socket_accept($this->socket) === false)
+            {
+                echo 'Error: ' . socket_strerror(socket_last_error($this->socket));
+            }
+
+            
+
+        } while (true);
     }
 }

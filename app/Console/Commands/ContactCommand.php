@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Lib\Contact;
+use App\Lib\ContactServer;
 use Illuminate\Console\Command;
 
 class ContactCommand extends Command
@@ -47,6 +47,6 @@ class ContactCommand extends Command
     {
         $host = 'localhost';
 
-        $this->contact = Contact::Instance($host);
+        $this->contact = ContactServer::Instance($host);
     }
 }
