@@ -2,28 +2,28 @@
 
 namespace App\Lib\Contact;
 
-final class Client
+class Client
 {
     /**
      * Hold the listening socket for this instance.
      *
      * @var Socket
      */
-    private $socket;
+    protected $socket;
 
     /**
      * Buffer to send messages to the client.
      *
      * @var array
      */
-    private $message = [];
+    protected $message = [];
 
     /**
      * Buffer with data to process by the server.
      *
      * @var array
      */
-    private $read = [];
+    protected $read = [];
 
     /**
      * Constructor for this class.
@@ -40,7 +40,46 @@ final class Client
         $this->socket = $socket;
     }
 
-    private function listen()
+    /**
+     * Listen for incoming streams of data.
+     *
+     * @return void
+     */
+    public function Interact(array $dataToSend, $callback)
+    {
+        foreach ($dataToSend as $data)
+        {
+            echo $data.PHP_EOL;
+        }
+
+        $dataToProcess = 'Hello world!';
+
+        if (is_callable($callback))
+        {
+            call_user_func($callback, $dataToProcess);
+        }
+        else
+        {
+            echo 'NOT CALLABLE'.PHP_EOL;
+        }
+    }
+
+    /**
+     * Listen for incoming streams of data.
+     *
+     * @return void
+     */
+    protected function read()
+    {
+        // ?
+    }
+
+    /**
+     * Listen for incoming streams of data.
+     *
+     * @return void
+     */
+    protected function write()
     {
         // ?
     }

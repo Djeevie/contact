@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Lib\ContactServer;
+use App\Lib\Contact\ContactServer;
 use Illuminate\Console\Command;
 
 class ContactCommand extends Command
